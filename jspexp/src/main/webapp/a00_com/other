@@ -1,0 +1,16 @@
+// 1. 요청값 처리
+		
+		// 2. model 데이터 처리
+		
+		// 3. view단 호출 처리
+		//		1) out객체로 출력 처리..
+		//	respose 객체는 client단에 전달하는 객체로 기능메서드 getWriter()를 통해서
+		//	화면을 출력하는 printWriter 객체를 리턴한다.
+		//PrintWriter out = response.getWriter()	
+		//out.print("hello");
+		//		2) jsp를 호출
+		String page="a01_begin\\a30..mvc01.jsp"; //이동항 경로와 jsp파일
+		// 요청객체와 반응객체와 함꼐 넘길 jsp 페이지 호출
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
+	}

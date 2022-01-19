@@ -1,0 +1,134 @@
+# jsp 지식체계 계열화
+1. 웹프로그래밍에 대한 이해
+	1) network: ip, port
+	2) client/server
+	client인 브라우저 http://localhost:7080/프로젝트명/특정한포드/파일명.jsp
+	http : 여러 통신 규약 중에 html 화면을 전송에 효율적인 통신 규약(네트워크 언어)를 말한다.
+	localhost : 원격에 있는 경우 ip주소를 mapping하여 호출하여 처리 된다.
+	7080 : 특정한 webserver의 port번호, 여러 개의 port를 사용할 수 있다
+	프로젝트명/특정한포드/파일명.jsp : 특정한 경로에 있는 자원의 위치
+	# 요청(request), 반응(response)
+	client(브라우저)  <======>  server(톰캣)
+		url입력      ========> 자원을 찾아서 jsp의 경우 컴파일, html 변환과정
+		                      controller(MVC) 문자열전달/jsp 호출      
+  받은자원화면랜더링		<======== 해당 자원(소스-html(css,js), jsp)
+    0) jquery string : 요청페이지?key1=value1&key2=value2
+  	1) cookie : 클라이언트
+  	2) session : 서버
+  	3) 요청값/반응값의 한글 처리, 숫자형 변환처리(Integer.parseInt), null값처리..
+  	4) 기본 코드와 el, jstl 처리..
+		${param.요청키)
+2. web 프로젝트 만들기 및 환경 설정
+	1) jsp 환경 : 프로젝트 만들고, port설정, 웹어플리케이션 서버 설정 및 연동 처리
+	2) 스프링 환경 (version)
+		- 초창기 lib 설정 환경 **, xml 등으로 웹 컨테이너 자동 설정환경 처리..
+		- maven 처리 환경 : 자동으로 online 상 lib 로딩을 할 수 있는 환경(xml)
+		- gradle 처리 환경 : 자동으로 online 상 lib 로딩을 할 수 있는 환경(gradle 파일로 설정)
+		- 스프링 부트 처리 환경 : maven, gradle를 통해서 설정하고, 
+			컨테이너 설정환경도 자동으로 설정.
+
+3. jsp의 기본
+	1) jsp 페이지의 구성요소
+	2) 디렉티브 : jsp 상단에 <% 옵션들
+		<%@ page
+		<%@ include
+	3) 스크립트 요소 : declare<%! %>, scriptlet<% %>, expression<%=%>
+	4) 요청 기본 객체(request)
+	5) 반응 기본 객체(response)
+4. java와 jsp
+	1) jsp에서 java코드의 사용
+	2) 조건문 반복문 처리
+	3) 데이터베이스연동 처리
+5. 기본 객체와 영역
+	1) 기본 객체
+	2) 범위에 따른 객체(변수가 선언되고 그 변수의 유지기간에 따른 분류)
+		page (pageContext) : 현재 페이지에서만 사용가능
+		request	: 요청값을 처리된 페이지까지 사용가능  submit()  페이지?요청=요청값
+		session : 브라우저와 서버가 연결된 상태까지 사용가능 cf) a href, location.href 등으로도 유지 가능
+		application : 서버(tomcat)이 재기동 전까지 현재 서버가 유지되는 기간
+6. 페이지 모듈화와 요청 흐름제어
+	1) 한 페이지에서 여러가지 페이지를 호출하여, 재사용화면을 구성하게 처리하는 것을 말한다.
+	2) iframe, <jsp:include page="">, <%@ include file=""/>
+
+7. 에러처리
+	- 각페이지별로 에러가 발생했을 때, 처리하는 부분
+	- 서버단위로 에러를 처리하는 부분.
+8. 클라이언트와 대화
+	1) 쿠키(클라이언트에 저장) : 
+		Cookie c1 = new Cookie(key, value);
+		response.addCookie(c1);
+		Cookie[] cookies = request.getCookies();
+	2) 세션(서버에 저장)
+		session.setAttribute("key", value);
+		session.getAttribute("key");
+		<jsp:useBean scope="session"/>
+		<c:set var="" value="" scope="session"/>
+		${변수명}
+9. useBean 활용
+	1) 객체 선언
+		<jsp:useBean id="" class="패키지명.클래스명" scope="세션scope"/>
+		<jsp:setProperty name="아이디명" value="저장할 데이터"/>
+		<% 아이디명.set프로퍼터(저장데이터) %>
+		${아이디명.set프로퍼티(저장데이터)}
+		<jsp:getProperty name="아이디명" />
+		<% 아이디명.get프로퍼터()%>
+		**** ${아이디명.프로퍼터}
+		
+	2) 요청값 자동 객체 ***
+10. 태그lib
+	1) el : ${변수} ${객체참조.property명}, ${param.요청키}, ${paramValues.요청키[0]}
+	2) jstl : <c:set var="변수명 value="저장데이터" scope="session범위"/>
+		<c:if test="${조건/반복문}">
+		<c:choose>
+			<c:when test="${조건1}"></c:when>
+			<c:when test="${조건2}"></c:when>
+			<c:when test="${조건3}"></c:when>
+			<c:others>기타조건</c:when>
+		</c:choose>
+		<c:forEach var="" begin="" end="" step="">	
+		<c:forEach var="단위객체" items="${배열형}" varStatus="sts">
+			${단위객체.프로퍼터}	
+11. MVC 개발 패턴	
+	 servlet을 controller로 만들어,
+	 model(핵심데이터 저장)과 view(화면처리)를 나누어 역할 분담하여 처리하는 것을 말한다.
+	 
+12. ajax를 위한 jsp 데이터 처리..
+	- js
+		var xhr = new XMLHttpRequest()
+		xhr.open("요청페이지","get/post", 비동기여부)
+		xhr.send();
+		xhr.onreadystatechange=function(){
+			// 비동기일 때, 처리할 함수.
+			if(xhr.readyState == 4 && xhr.status == 200){
+				// xhr.readyState : 서버로 부터 데이터를 다 받았을 때.
+				// xhr.status : http반응 코드값이 정상범위에 있을 때.
+				
+				xhr.responseText : 서버로 받은 결과문자열,  json형식 {"name":"홍길동"}
+				var obj = JSON.parse( xhr.responseText ) : 받은 문자열을 객체로 변환 처리.
+			}
+		}
+	- jquery
+		$.ajax({
+			url:"",
+			type:"get/post",
+			data:"요청key/value",
+			dataType:"반응으로온값의 형식지정", // json 형식일 때는 객체형으로 바로 처리할 수 있다,
+			success:function(data){
+				// 정상적으로 온 결과 처리
+			},
+			error:function(err){
+				// 에러가 발생했을 때 처리
+			}
+			
+		});
+	- jsp에서 활용
+	- vue에서 활용..
+13. 스프링 단계별 환경 설정
+
+
+
+
+		
+	
+			
+		

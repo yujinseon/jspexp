@@ -1,0 +1,35 @@
+# jsp 지식계열화 check point
+# 네트워크와 요청값 처리.
+1. 웹프로그램에서 server와 client란 무엇이면, client는 서버를 접속할 때,
+	어떻게 접속하는가?
+	
+2. 웹프로그램에서 요청값이란 무엇이면, 반응값은 무엇을 말하는가?
+	요청 : 브라우저에 서버에 특정 자원에 해당 url로 호출하는 부분
+		  query string형식으로 데이터를 전달하는 것을 말한다.
+	반응 : jsp나 servlet을 통해서 response 객체에 의해 전달할 화면,
+		  문자열(json)데이터를 처리하기 위한 객체..
+3. 요청값의 형태인 query string이 무엇인지 아는가? 해당 내용을 기술하고,
+	이것은 form 하위 요소객체에 어떤 영향을 미치는지 기술하세요.
+	페이지?key=value&key2=value2&key3=value3
+	<form action="이동할페이지">
+		<input name="key" value="value">
+		<input name="key2" value="value2">
+		<input name="key3" value="value3">
+		<input type="submit"/>
+	
+4. 웹서버호출 시 구성요소인 http://localhost:7080/jspexp/call.jsp
+	를 아는가?  	
+	http :
+	localhost :
+	7080 :
+	jspexp :
+	call.jsp
+5. 위 call.jsp를 호출하였을 때, jsp가 html을 전달하는 과정을 기술하세요.
+	jsp ==> java(servlet)  ==> class
+		==> response.getWriter.print("html태그") 클라이언트에 html을
+			java와 함께 코드를 전달.
+	out.print("<html><body><h1>안녕</h1></html>");		
+
+# 마지막에 대부분 아는 개념이다. // 모르는 부분이 @@@ 있다.	
+# 답만 적어서 개인 카톡으로 전달 부탁드려요..~10:25
+카톡으로 전달하시고, 손들기 해주세요.	 	

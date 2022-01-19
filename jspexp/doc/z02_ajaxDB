@@ -1,0 +1,98 @@
+# ajax DB 처리.
+1. controller, ajax 단계이해
+	 controller단계에서 ajax전송 데이터 확인
+2. 객체의 json문자열 처리 이해하기
+	- 자바의 객체를 기준으로 json로 변경
+		class Person{
+			private String name;
+			private int age;
+			
+		}
+		==> Person p01 = new Person("홍길동",25);
+		==>
+		var p01 = {"name":"홍길동", "age",25};
+	- 효과적인 처리를 이용해서 만들어진 api를 활용
+		Gson : 객체를 json데이터로 변환, json데이터를 객체로 변환.
+3. controller를 통한 데이터 가져오기 
+	db연동, json데이터 만들기
+4. 요청값을 통한 데이터 가져오기..
+
+
+# ajax 처리는 위한 내용..
+1. controller json DB 처리
+2. jsp에서 jquery ajax 처리 방식 
+      1)  controller(/ajaxExp01)  화면 버튼 클릭시  "서버호출" 출력
+      2)  controller(/ajaxExp02)  선수명[  ] 버튼 클릭시  요청값 출력
+      3)  controller(/ajaxExp03)  버튼 클릭시 {"todya","2022/01/01"} 호출
+
+3. $.each 구문을 통한 배열형 객체에 대한 이해 및 출력
+
+
+# ajax를 위한 연습.
+1. json에 대한 이해
+2. 요청값에 대한 이해
+3. controller의 선언과 호출에 대한 이해
+	- 문자열로 데이터 받는 처리.
+		out.print("json문자열")
+4. jsp(html)
+	1) jquery ajax 호출 처리방법
+		- query string :  data:"", ==> controller에 요청값 영향
+		- success:function(data){} ==> controller의 
+			out.print("json문자열")
+
+# ajax 화면 구현
+1. 기본화면 구현(jsp)
+       로그인
+	 id  [    ]
+	 pass [    ]
+	    [로그인]
+	 이 화면을 통해서 구현할 내용이 무엇인가?
+	 아이디와 패스워드를 입력해서 로그인했을 때, 처리할 부분을 어떻게 하는가?
+	 DB처리를 통해서 확인해준다. 
+	 DB를 접속하는 Dao 프로그램과 기능메서드가 있어야 한다.
+	 	- sql
+	 	- vo
+	 	- 매개변수를 통해 DB 처리
+	 위 DB프로그램이 id와 pass를 넘겨주어야 한다?
+	 	# client
+	 		요청페이지?id=@@&pass=### (client에서 넘겨주는 부분)
+	 		jsp를 통해서 요청값을 받고 요청값을 DB에 넘겨준다.
+	 	# controller	  
+	    	request.getParameter("id")
+	    	request.getParameter("pass")
+			만들어진 DAO 객체 호출
+			json데이터로 다시 client에 response 전달.	
+			out.print("");
+	 화면단에 ajax로 처리할 내용
+	 	1) 이벤트 : key, click
+	 		$("#btn").click(function(){
+	 		
+	 		});
+	 	2) 넘길 데이터 정리
+	 		// 누구한테(url-서버의 컨트롤러), 무엇을 넘기고(data) 받을 것(success)인가?
+	 		넘길데이터와 받을 데이터
+			$.ajax({
+				url:"해당 url 주소",
+				data:"요청값",
+				dataType:"받는 데이터 유형..",
+				success:function(data){
+					
+				}
+			});	 		
+ # 처리시 에러에 대한 대응
+ 1. 브라우저에러
+ 	f12 
+ 	- url:"${path}/deptAjax.do", 
+ 	주소를 잘못적을 때, 404 the server responded with a status of 404 ()
+ 	해당 라인에 에러 발생해서 나오는 에러 : Uncaught SyntaxError: Unexpected identifier
+ 		line을 클릭해서 에러를 확인한다.
+ 	
+ 2. 서버에러 
+ 	nullpointer 			
+		
+
+
+
+
+
+		
