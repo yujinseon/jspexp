@@ -1,0 +1,45 @@
+2022-01-20
+[1단계:개념] 1. 서버단위 에러의 처리 방법을 기술하세요.
+에러 발생시 보여주는 페이지에 <% page isErrorPage="true"%>를 설정한후
+해당 프로젝트 좌클릭 java ee tools --> generate Deploy~~ 를 클릭하여 web.xml을 설정한다
+web.xml open with 에서 xml 에디터를 클릭후 각 에러마다의 보여주는 것을 설정한다
+
+[1단계:개념] 2. session scope 4가지 범위를 설정하고, 
+				이 범위에 따른 페이지 별로 데이터를 확인하세요.
+1.page(페이지 단위) 
+2.request(요청되는 페이지까지 설정유지)
+/request.getRequestDispatcher("").forward(request, response);
+3.sesstion (서버와 클라이언트 단위까지 설정 유지)
+4.application (서버가 꺼지지 않는 이상 유지 브라우저가 다르더라도 유지가 된다.)
+
+pageContext.setAttribute("ex1", "page");
+
+request.setAttribute("ex2", "request");
+
+session.setAttribute("ex3", "session");
+
+application.setAttribute("ex4", "application");
+
+request.getRequestDispatcher("second.jsp").forward(request, response);
+
+<table>
+	<tr><th>page</th><td><%=pageContext.getAttribute("ex1")%></td></tr>
+	<tr><th>request</th><td><%=request.getAttribute("ex2")%></td></tr>
+	<tr><th>session</th><td><%=session.getAttribute("ex3")%></td></tr>
+	<tr><th>application</th><td><%=application.getAttribute("ex4")%></td></tr>
+</table>
+
+<table>
+	<tr><th>page</th><td><%=pageContext.getAttribute("ex1")%></td></tr>
+	<tr><th>request</th><td><%=request.getAttribute("ex2")%></td></tr>
+	<tr><th>session</th><td><%=session.getAttribute("ex3")%></td></tr>
+	<tr><th>application</th><td><%=application.getAttribute("ex4")%></td></tr>
+	<h3 onclick="location.href='third.jsp'">페이지 이동</h3>
+</table>
+
+<table>
+	<tr><th>page</th><td><%=pageContext.getAttribute("ex1")%></td></tr>
+	<tr><th>request</th><td><%=request.getAttribute("ex2")%></td></tr>
+	<tr><th>session</th><td><%=session.getAttribute("ex3")%></td></tr>
+	<tr><th>application</th><td><%=application.getAttribute("ex4")%></td></tr>
+</table>

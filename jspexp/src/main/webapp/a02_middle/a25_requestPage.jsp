@@ -21,34 +21,7 @@
   src="${path}/a00_com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 <%--
- # 회원등록과 로그인 페이지
- 1.업무 플로우 순서
- 	# 일반사용자
- 	1) 로그인 화면
- 	2) 회원등록 페이지
- 	3) 회원 상세화면 및 수정/
- 	# 관리자페이지
- 	1) 회원리스트
- 	2) 회원의 등록/수정/삭제
- 		- 등록 : 회사기반 사원등록 시스템
- 2. 처리순서
- 	1) database 설계 : 테이블 구성
- 	2) 사용할 sql 정리
- 	3) 위 sql에 맞게 처리한 VO 구성
- 	4) DAO 만들기
- 		- 등록
- 		- 로그인
- 		- 리스트
- 		- 수정
- 		- 삭제
- 	5) 화면 구성 페이지 만들기
- 		- 로그인
- 		- 회원등록
- 		- 회원리스트
- 		- 회원상세
-
- 	6) DB 연동 처리
- 		
+ 
  
 --%>
 //
@@ -58,10 +31,14 @@
 </script>
 </head>
 <body>
-	<h3>제목</h3>
+	
+	<h3>세션 스코프(요청페이지)</h3>
 	<table>
-		<tr><th>타이틀</th></tr>
-		<tr><td>내용</td></tr>
+		<tr><th>타이틀</th><td><%=pageContext.getAttribute("pageVar")%></td></tr>
+		<tr><th>요청범위</th><td><%=request.getAttribute("reqVar")%></td></tr>
+		<tr><th>세션범위</th><td><%=session.getAttribute("sessVar")%></td></tr>
+		<tr><th>어플리케이션범위</th><td><%=application.getAttribute("appVar")%></td></tr>
 	</table>
+	<h4 onclick="location.href='a26_sessionPage.jsp'">페이지 이동</h4>
 </body>
 </html>
